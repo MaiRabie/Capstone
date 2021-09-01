@@ -1,6 +1,4 @@
-FROM nginx:alpine
-
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY index.html /usr/share/nginx/html
-COPY health /usr/share/nginx/html
-COPY scm-source.json /
+FROM nginx:mainline-alpine
+RUN rm /etc/nginx/conf.d/*
+ADD hello.conf /etc/nginx/conf.d/
+ADD index.html /usr/share/nginx/html/
