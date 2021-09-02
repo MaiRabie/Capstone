@@ -31,10 +31,10 @@ jobs:
       - run:
           name: run docker
           command: |
-            docker build -t hello .
+            docker build -t hello2 .
             echo ***************************** finish build stage ${CIRCLE_WORKFLOW_ID} **************************
             docker image ls
-            docker run -p 8080:8080 -d hello
+            docker run -p 8080:8080 -d hello2
             curl -v http://localhost:8080/index.html
   URL_check:
     machine: true
