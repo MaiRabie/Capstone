@@ -33,7 +33,10 @@ jobs:
           command: |
             docker build -t ${CIRCLE_WORKFLOW_ID} .
             docker image ls
-            docker run --network container:${CIRCLE_WORKFLOW_ID} appropriate/curl --retry 10 --retry-connrefused http://localhost:8080/index.html && docker run ${CIRCLE_WORKFLOW_ID} 
+            docker run ${CIRCLE_WORKFLOW_ID} 
+            docker run -d --name my-app ${CIRCLE_WORKFLOW_ID}
+            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080/index.html
+
 
   URL_check:
     machine: true
