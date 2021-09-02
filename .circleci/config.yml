@@ -42,3 +42,9 @@ jobs:
           command: |
             run_docker.sh
             curl http://localhost:8080/index.html
+
+workflows:
+  default:
+    jobs:
+      - build
+      - Docker
