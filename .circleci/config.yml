@@ -34,7 +34,7 @@ jobs:
             docker build -t hello .
             echo ***************************** finish build stage ${CIRCLE_WORKFLOW_ID} **************************
             docker image ls
-            docker run -p 8000:80 hello
+            docker run -d --name hello hello -p 8000:80 hello
             docker exec hello curl --retry 1000 --retry-connrefused http://localhost:8080/index.html
   URL_check:
     machine: true
