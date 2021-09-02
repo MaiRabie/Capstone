@@ -33,7 +33,7 @@ jobs:
       - run:
           name: run docker
           command: |
-            docker build -t helloworldtest 
+            docker build -t helloworldtest .
             curl http://localhost:8080/index.html
 
 workflows:
