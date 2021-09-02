@@ -34,7 +34,7 @@ jobs:
             docker build -t ${CIRCLE_WORKFLOW_ID} .
             docker image ls
             docker run ${CIRCLE_WORKFLOW_ID} 
-            docker run --network container:${CIRCLE_WORKFLOW_ID} appropriate/curl --retry 10 --retry-connrefused http://localhost:8080/index.html
+            # docker run --network container:${CIRCLE_WORKFLOW_ID} appropriate/curl --retry 10 --retry-connrefused http://localhost:8080/index.html
 
   URL_check:
     machine: true
@@ -44,10 +44,12 @@ jobs:
       - run:
           name: URL check
           command: |
-            curl http://localhost:8080/index.html
+            docker run --network container:${CIRCLE_WORKFLOW_ID} appropriate/curl --retry 10 --retry-connrefused http://localhost:8080/index.html
 workflows:
   default:
     jobs:
       - build
       - Docker
-      # - URL_check
+      - URL_check
+          requires: [Docker]
+        
