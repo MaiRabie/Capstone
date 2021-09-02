@@ -36,6 +36,13 @@ jobs:
             docker run -p 8080:80 -d ${CIRCLE_WORKFLOW_ID}
             netstat -tulpn
             curl -v http://localhost:8080/index.html
+      - run:
+          name: docker upload
+          command: |
+            dockerpath="78dadb74358b/${CIRCLE_WORKFLOW_ID}"
+            docker login --username=78dadb74358b &&\
+                docker image tag ${CIRCLE_WORKFLOW_ID} $dockerpath
+            docker image push $dockerpath      
 
   DockerImageUpload:
     machine: true
@@ -54,6 +61,6 @@ workflows:
     jobs:
       - build
       - Docker
-      - DockerImageUpload:
-          requires: [Docker]
+      # - DockerImageUpload:
+      #     requires: [Docker]
 
