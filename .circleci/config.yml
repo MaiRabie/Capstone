@@ -31,17 +31,17 @@ jobs:
       - run:
           name: run docker
           command: |
-            docker build -t ${CIRCLE_WORKFLOW_ID} .
+            docker build -t helloworldweb .
             docker image ls
-            docker run -p 8080:80 -d ${CIRCLE_WORKFLOW_ID}
+            docker run -p 8080:80 -d helloworldweb
             netstat -tulpn
             curl -v http://localhost:8080/index.html
       - run:
           name: docker upload
           command: |
-            dockerpath="78dadb74358b/${CIRCLE_WORKFLOW_ID}"
-            docker login --username=78dadb74358b &&\
-                docker image tag ${CIRCLE_WORKFLOW_ID} $dockerpath
+            dockerpath="78dadb74358b/helloworldweb"
+            docker login --username=78dadb74358b --password=maidocker123456789 &&\
+                docker image tag helloworldweb $dockerpath
             docker image push $dockerpath      
 
   DockerImageUpload:
