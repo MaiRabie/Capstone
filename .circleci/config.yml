@@ -50,6 +50,6 @@ workflows:
     jobs:
       - build
       - Docker
-      - URL_check
-          requires: [Docker]
+      - URL_check:
+          requires: [Docker]      
         
