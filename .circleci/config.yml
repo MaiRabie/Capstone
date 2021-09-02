@@ -54,4 +54,6 @@ workflows:
     jobs:
       - build
       - Docker
-      - DockerImageUpload
+      - DockerImageUpload:
+          requires: [Docker]
+
