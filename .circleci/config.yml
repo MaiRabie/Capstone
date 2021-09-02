@@ -24,17 +24,19 @@ jobs:
             make lint
 
   Docker:
-    docker:
-    # Use the same Docker base as the project
-      - image: circleci/node:13.8.0
+    machine: true
     working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: run docker
           command: |
-            run_docker.sh
-            curl http://localhost:8080/index.html
+            docker build -t test .
+            echo ***************************** finish build stage ${CIRCLE_WORKFLOW_ID} **************************
+            docker image ls
+            docker run -p 8080:80 -d test
+            netstat -tulpn
+            curl -v http://localhost:8080/index.html
 
 workflows:
   default:
