@@ -35,7 +35,7 @@ jobs:
             echo ***************************** finish build stage ${CIRCLE_WORKFLOW_ID} **************************
             docker image ls
             docker run -d --name hello hello
-            docker run --network container:hello appropriate/curl --retry 200 --retry-connrefused http://localhost:8080/index.html
+            docker exec hello curl --retry 1000 --retry-connrefused http://localhost:8080/index.html
   URL_check:
     machine: true
     working_directory: ~/repo
@@ -50,6 +50,6 @@ workflows:
     jobs:
       - build
       - Docker
-      - URL_check
+      # - URL_check
           # requires: [Docker]      
         
