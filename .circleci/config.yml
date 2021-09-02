@@ -1,13 +1,11 @@
+version: 2.1
 
-version: 2
 jobs:
   build:
     docker:
     # Use the same Docker base as the project
       - image: python:3.7.3-stretch
-
     working_directory: ~/repo
-
     steps:
       - checkout
       - run:
@@ -19,22 +17,17 @@ jobs:
             # Install hadolint
             wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
                 chmod +x /bin/hadolint
-
-      # run lint!
       - run:
           name: run lint
           command: |
             . venv/bin/activate
             make lint
 
-
   Docker:
     docker:
     # Use the same Docker base as the project
       - image: circleci/node:13.8.0
-
     working_directory: ~/repo
-
     steps:
       - checkout
       - run:
