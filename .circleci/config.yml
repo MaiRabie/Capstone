@@ -103,7 +103,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: ACCESS_KEY_ID
           aws-secret-access-key: SECRET_ACCESS_KEY
-          region: AWS_REGION
+          # region: AWS_REGION
           repo: eks_orb_demo_app
           dockerfile: Dockerfile
           path: .
