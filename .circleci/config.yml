@@ -10,8 +10,7 @@ jobs:
   build:
     docker:
     # Use the same Docker base as the project
-      - image: circleci/node:13.8.0
-
+      - image: python:3.7.3-stretch
     working_directory: ~/repo
     steps:
       - checkout
@@ -50,15 +49,14 @@ jobs:
             docker login --username=78dadb74358b --password=$DOCKER_PASSWORD &&\
                 docker image tag helloworldweb $dockerpath
             docker image push $dockerpath
-  buildAndPush:
-    docker:
-    # Use the same Docker base as the project
-      - image: amazon/aws-cli
-    working_directory: ~/repo    
-    steps:
-      - checkout
+
+workflows:
+  default:
+    jobs:
+#      - build
+#      - Docker
       - aws-ecr/build-and-push-image:
-          # name: build-and-push-image
+          name: build-and-push-image
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: ACCESS_KEY_ID
           aws-secret-access-key: SECRET_ACCESS_KEY
@@ -77,13 +75,5 @@ jobs:
           docker-login: true          
           setup-remote-docker: true
           remote-docker-version: 19.03.13
-
-workflows:
-  default:
-    jobs:
-#      - build
-#      - Docker
-      - buildAndPush 
-
 
 
