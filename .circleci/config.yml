@@ -67,7 +67,7 @@ workflows:
           tag: ${CIRCLE_SHA1}
           create-repo: true
           executor: aws-eks/python3
-          profile-name: "989865073797"
+          profile-name: "default"
           no-output-timeout: 20m
           # skip-when-tags-exist: false
           dockerhub-username: DOCKERHUB_USERNAME 
