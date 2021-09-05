@@ -62,8 +62,8 @@ workflows:
           aws-secret-access-key: SECRET_ACCESS_KEY
           region: AWS_REGION
           repo: eks_orb_demo_app
-          dockerfile: Dockerfile
-          path: .
+          dockerfile: "78dadb74358b/helloworldweb"
+          path: https://hub.docker.com/repository/docker
           tag: ${CIRCLE_SHA1}
           create-repo: true
           executor: aws-eks/python3
@@ -75,5 +75,6 @@ workflows:
           docker-login: true          
           setup-remote-docker: true
           remote-docker-version: 20.10.7
+     
 
 
