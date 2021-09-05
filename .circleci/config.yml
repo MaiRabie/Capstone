@@ -112,8 +112,10 @@ workflows:
           executor: aws-eks/python3
           profile-name: "989865073797"
           no-output-timeout: 20m
-          skip-when-tags-exist: false
-  
-
+          # skip-when-tags-exist: false
+          dockerhub-username: DOCKERHUB_USERNAME 
+          dockerhub-password: DOCKERHUB_PASSWORD
+          docker-login: true          
+          setup-remote-docker: true
 
 
